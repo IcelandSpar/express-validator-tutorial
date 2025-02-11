@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= locals.title %></title>
+</head>
+<body>
+    <h1><%= locals.title %></h1>
+    <form action="/search" method="GET" style="margin: 0 0 1rem 0;">
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="name">
+        <button type="submit">Search for user</button>
+    </form>
+    <a href="/">Back to Home</a>
+
+</body>
+</html>

@@ -105,4 +105,19 @@ exports.usersDeletePost = (req, res) => {
     usersStorage.deleteUser(req.params.id);
     res.redirect("/");
   };
+
+  exports.usersSearchGet = (req, res, next) => {
+    
+    if(req.query.name) {
+        res.render('searchResults', {name: req.query.name, title: 'Search Results', matches: usersStorage.getName(req.query.name)})
+    } else {
+        res.render('search', {
+            title: 'User Search',
+        })
+    }
+
+
+  }
+
+
   

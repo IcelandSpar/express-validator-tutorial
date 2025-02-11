@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= locals.title %></title>
+</head>
+<body>
+    <h1><%= locals.title %></h1>
+    <p>You searched: <%= locals.name %></p>
+    <% if(locals.matches.length == 0) { %>
+        <p>No one was found by that name : (</p>
+    <% } else { %> 
+
+        <ul>
+            <% locals.matches.map(item => { %>
+                <li style="margin: 1rem 0;">Name: <%= item.firstName %> <%= item.lastName %> <br> Email: <%= item.email %> <br>Age:  <%= item.age %> <br>Bio: <%= item.bio %></li>
+           <% }) %>
+        </ul>
+
+   <% } %>
+
+   <a href="/search">Search for another user</a>
+   <br>
+   <a href="/">Back to Home</a>
+
+    
+
+</body>
+</html>
