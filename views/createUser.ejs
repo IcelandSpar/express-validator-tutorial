@@ -1,0 +1,33 @@
+<!-- views/createUser.ejs -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+<body>
+  <h1><%= title %></h1>
+  <%- include("partials/errors.ejs") %>
+  <form action="/create" method="POST">
+    <label for="firstName">First Name: </label>
+    <input type="text" name="firstName" id="firstName" value="<%= locals.firstName %>" required>
+    <br>
+    <label for="lastName">Last Name: </label>
+    <input type="text" name="lastName" id="lastName" value="<%= locals.lastName %>" required>
+
+    <br>
+    <label for="email">Email: </label>
+    <input type="text" name="email" id="email" value="<%= locals.email %>" required>
+ 
+    <br>
+    <label for="age">Age: </label>
+    <input type="text" name="age" id="age" value="<%= locals.age %>">
+
+    <br>
+    <label for="bio">Bio: </label>
+    <textarea type="text" name="bio" id="bio"><%= locals.bio %></textarea>
+    <button type="submit">Submit</button>
+
+  </form>
+  <a href="/">Back to home</a>
+</body>
+</html>
