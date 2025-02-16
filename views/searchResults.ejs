@@ -14,7 +14,7 @@
 
         <ul>
             <% locals.matches.map(item => { %>
-                <li style="margin: 1rem 0;">Name: <%= item.firstName %> <%= item.lastName %> <br> Email: <%= item.email %> <br>Age:  <%= item.age %> <br>Bio: <%= item.bio %></li>
+                <li style="margin: 1rem 0;">Name: <%= item.first_name %> <%= item.last_name %> <br> Email: <%= item.email %> <br>Age: <%= item.age || 'No Age submitted' %><br>Bio: <%= item.bio || 'No Bio submitted' %></li>
            <% }) %>
         </ul>
 

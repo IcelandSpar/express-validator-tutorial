@@ -9,10 +9,10 @@
   <%- include("partials/errors.ejs") %>
   <form action="/<%= locals.user.id %>/update" method="POST">
     <label for="firstName">First Name: </label>
-    <input type="text" name="firstName" value="<%= user.firstName %>" required>
+    <input type="text" name="firstName" value="<%= user.first_name %>" required>
     <br>
     <label for="lastName">Last Name: </label>
-    <input type="text" name="lastName" value="<%= user.lastName %>" required>
+    <input type="text" name="lastName" value="<%= user.last_name %>" required>
     <br>
     <label for="email">Email: </label>
     <input type="text" name="email" value="<%= user.email %>" required>

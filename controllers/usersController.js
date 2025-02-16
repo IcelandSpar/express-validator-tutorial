@@ -1,5 +1,6 @@
 // controllers/usersController.js
 const usersStorage = require("../storages/usersStorage");
+const db = require('../db/queries');
 
 
 // This just shows the new stuff we're adding to the existing contents
@@ -34,10 +35,13 @@ const validateUser = [
 
 
 
-exports.usersListGet = (req, res) => {
+exports.usersListGet = async (req, res) => {
+
+  const users = await db.getUsers();
+
   res.render("index", {
     title: "User list",
-    users: usersStorage.getUsers(),
+    users: users,
   });
 };
 
@@ -52,11 +56,11 @@ exports.usersCreateGet = (req, res) => {
 
 
 
-  exports.usersUpdateGet = (req, res) => {
-    const user = usersStorage.getUser(req.params.id);
+  exports.usersUpdateGet = async (req, res) => {
+    const user = await db.getUser(req.params.id);
     res.render("updateUser", {
       title: "Update user",
-      user: user,
+      user: user[0],
     });
   };
 
@@ -77,7 +81,7 @@ exports.usersCreatePost = [
         });
       }
       const { firstName, lastName, email, age, bio } = req.body;
-      usersStorage.addUser({ firstName, lastName, email, age, bio });
+      db.insertUserInfo([ firstName, lastName, email, age, bio ]);
       res.redirect("/");
     }
   ];
@@ -95,21 +99,23 @@ exports.usersCreatePost = [
         });
       }
       const { firstName, lastName, email, age, bio } = req.body;
-      usersStorage.updateUser(req.params.id, { firstName, lastName, email, age, bio });
+      db.updateUserInfo([ req.params.id, firstName, lastName, email, age, bio ]);
       res.redirect("/");
     }
   ];
 
   // Tell the server to delete a matching user, if any. Otherwise, respond with an error.
 exports.usersDeletePost = (req, res) => {
-    usersStorage.deleteUser(req.params.id);
+    db.deleteUser(req.params.id);
     res.redirect("/");
   };
 
-  exports.usersSearchGet = (req, res, next) => {
+  exports.usersSearchGet = async (req, res, next) => {
     
     if(req.query.name) {
-        res.render('searchResults', {name: req.query.name, title: 'Search Results', matches: usersStorage.getName(req.query.name)})
+        const searchRes = await db.getSearch(req.query.name);
+
+        res.render('searchResults', {name: req.query.name, title: 'Search Results', matches: searchRes})
     } else {
         res.render('search', {
             title: 'User Search',

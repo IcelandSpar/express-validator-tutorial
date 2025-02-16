@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
 const usersRouter = require('./routes/usersRouter');
@@ -8,6 +10,6 @@ app.use(express.urlencoded({extended: true}));
 app.use('/', usersRouter);
 
 
-const PORT = process.env.PORT || 3000;
-
+const PORT = 3000;
+/* process.env.PORT || */ 
 app.listen(PORT, () => console.log('Express app listening on port ' + PORT));
